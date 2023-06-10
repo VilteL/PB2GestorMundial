@@ -26,8 +26,6 @@ public class test {
 		Integer valorDevuelto = mundial.getEquipos().size();
 		
 		assertEquals(valorEsperado,valorDevuelto);
-		
-		
 	}
 	
 	@Test
@@ -44,7 +42,6 @@ public class test {
 		} catch (PartidoJugadoException e) {
 			e.printStackTrace();
 		} catch (EquipoDuplicadoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -62,6 +59,35 @@ public class test {
 	public void queSePuedaCrearUnPartidoDeEliminatoriasConDosEquiposPertenecientesALaListaDeEquiposEnEliminatorias() {
 		Torneo mundial = new Torneo();
 		mundial.iniciarTorneo();
+		
+		Equipo equipoLocal = mundial.getEquipos().get(0);// QATAR
+		Equipo equipoVisitante = mundial.getEquipos().get(1);//ECUADOR
+		Equipo equipoLocal2 = mundial.getEquipos().get(2);
+		Equipo equipoVisitante2 = mundial.getEquipos().get(3);
+		
+		
+		try {
+			mundial.registrarPartido(1, equipoLocal, equipoVisitante);
+			mundial.registrarPartido(2, equipoLocal2, equipoVisitante2);
+		} catch (PartidoJugadoException e) {
+			e.printStackTrace();
+		} catch (EquipoDuplicadoException e) {
+			e.printStackTrace();
+		}
+		
+		mundial.registrarResultado(1, 0, 2);
+		mundial.registrarResultado(2, 3, 2);
+		mundial.finalizarFaseDeGrupos();
+		
+		try {
+			mundial.registrarPartido(4, equipoLocal2, equipoVisitante);
+		} catch (PartidoJugadoException | EquipoDuplicadoException e) {
+			e.printStackTrace();
+		}
+		Integer cantidaPartidosJugados = mundial.getPartidos().size();
+		
+		assertEquals((Integer) 3, cantidaPartidosJugados);
+		
 	}
 	
 	

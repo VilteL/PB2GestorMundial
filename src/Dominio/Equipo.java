@@ -4,19 +4,16 @@ import java.util.Objects;
 
 public class Equipo implements Comparable<Equipo>{
 	
-
-
 	private String nombre; 
 	private Integer puntos;
 	private String letraGrupo;
-	
 	
 	public Equipo(String nombre) {
 		this.nombre = nombre;
 		this.puntos = 0;
 	}
 
-
+	
 	public void setPuntos(Integer puntos) {
 		this.puntos = puntos;
 	}

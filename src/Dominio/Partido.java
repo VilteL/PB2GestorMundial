@@ -4,8 +4,6 @@ import Enums.TipoResultado;
 
 public class Partido {
 	
-	
-	
 	private Integer idPartido;
 	private Equipo equipoLocal;
 	private Equipo equipoVisitante;
@@ -13,14 +11,10 @@ public class Partido {
 	private Integer golesEquipoLocal;
 	private Integer golesEquipoVisitante;
 	
-	
-	
 	public Partido(Integer idPartido,Equipo equipoLocal, Equipo equipoVisitante) {
 		this.equipoLocal= equipoLocal;
 		this.equipoVisitante = equipoVisitante;
-		this.idPartido=idPartido;
-		
-		
+		this.idPartido=idPartido;		
 	}
 
 	public void setResultado(TipoResultado resultado) {

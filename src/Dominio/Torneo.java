@@ -81,6 +81,10 @@ public class Torneo {
 		this.equipos.get(31).setLetraGrupo("H");
 	}
 
+	
+	
+	
+	
 	public List<Equipo> getEquipos() {
 		return equipos;
 	}
@@ -104,21 +108,21 @@ public class Torneo {
 		
 		Partido nuevoPartido = new Partido(idPartido, local,visitante);
 		
-		for (Partido partido : partidos ) {
+		
+		for (Partido partido : partidos ){
 			if(local.getLetraGrupo().equals(visitante.getLetraGrupo())) {
-				if(partido.getEquipoLocal().equals(local)&&partido.getEquipoVisitante().equals(visitante)||
-						partido.getEquipoLocal().equals(visitante)&&partido.getEquipoVisitante().equals(local)) {
+				if(partido.getEquipoLocal().getNombre().equals(local.getNombre())&&
+						partido.getEquipoVisitante().getNombre().equals(visitante.getNombre())||
+						partido.getEquipoLocal().getNombre().equals(visitante.getNombre())
+						&&partido.getEquipoVisitante().getNombre().equals(local.getNombre())) {
 					throw new PartidoJugadoException();
 				}
-				else
-					this.partidos.add(nuevoPartido);		
+						
 			}
 			
 		}
+		this.partidos.add(nuevoPartido);
 		
-		if(this.partidos.size()==0) {
-			this.partidos.add(nuevoPartido);
-		}
 		
 	}
 	
