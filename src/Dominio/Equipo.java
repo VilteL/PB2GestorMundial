@@ -7,10 +7,13 @@ public class Equipo implements Comparable<Equipo>{
 	private String nombre; 
 	private Integer puntos;
 	private String letraGrupo;
+	private Integer golesAFavor, golesEnContra;
 	
 	public Equipo(String nombre) {
 		this.nombre = nombre;
 		this.puntos = 0;
+		this.golesAFavor = 0;
+		this.golesEnContra = 0;
 	}
 
 	
@@ -38,15 +41,11 @@ public class Equipo implements Comparable<Equipo>{
 		return letraGrupo;
 	}
 
-
-	
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(letraGrupo, puntos);
 	}
-
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -66,8 +65,33 @@ public class Equipo implements Comparable<Equipo>{
 			return -this.puntos.compareTo(o.puntos);
 		}
 		return this.letraGrupo.compareToIgnoreCase(o.letraGrupo);
-	
 	}
+
+
+	public Integer getGolesAFavor() {
+		return golesAFavor;
+	}
+
+
+	public void setGolesAFavor(Integer golesAFavor) {
+		this.golesAFavor = golesAFavor;
+	}
+
+
+	public Integer getGolesEnContra() {
+		return golesEnContra;
+	}
+
+
+	public void setGolesEnContra(Integer golesEnContra) {
+		this.golesEnContra = golesEnContra;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 
 
 	

@@ -142,6 +142,7 @@ public class Torneo {
 				partido.setResultado(resultado);
 				
 				sumarPuntaje(resultado, idPartido);
+				agregarGolesAFavorYEnContra(partido, golesLocal, golesVisitante);
 			}
 		}
 	}
@@ -187,6 +188,21 @@ public class Torneo {
 		}
 	}
 	
+	private void agregarGolesAFavorYEnContra(Partido partido, Integer golesLocal, Integer golesVisitante) {
+		
+		Equipo local = partido.getEquipoLocal();
+		Equipo visitante = partido.getEquipoVisitante();
+		
+		local.setGolesAFavor(local.getGolesAFavor()+golesLocal);
+		visitante.setGolesAFavor(visitante.getGolesAFavor()+golesVisitante);
+		
+		local.setGolesEnContra(local.getGolesEnContra()-golesVisitante);
+		visitante.setGolesEnContra(visitante.getGolesEnContra()-golesLocal);
+		
+	}
+	
+	
+	
 	public void registrarResultado(Integer idPartido, Integer golesLocal, Integer golesVisitante, Integer penalesConvertidosLocal, Integer penalesConvertidosVisitante) {
 		
 		TipoResultado resultado = null; 
@@ -209,6 +225,11 @@ public class Torneo {
 			partidoEncontrado.setResultado(resultadoDePenales);
 			
 			sumarPuntaje(resultadoDePenales, idPartido);
+			Integer sumaDeGolesConvertidosLocal = golesLocal + penalesConvertidosLocal;
+			Integer sumaDeGolesConvertidosVisitante = golesVisitante + penalesConvertidosVisitante;
+			
+			agregarGolesAFavorYEnContra(partidoEncontrado, sumaDeGolesConvertidosLocal, sumaDeGolesConvertidosVisitante);
+			
 			
 		}
 	}
@@ -235,47 +256,10 @@ public class Torneo {
 	
 	public void finalizarFaseDeGrupos() {
 		ordenarTablasPorPuntaje();
-		
-		Equipo primeroDelGrupoA  = this.equiposOrdenados.get(0);
-		Equipo segundoDelGrupoA  = this.equiposOrdenados.get(1);
-		
-		Equipo primeroDelGrupoB  = this.equiposOrdenados.get(4);
-		Equipo segundoDelGrupoB  = this.equiposOrdenados.get(5);
-		
-		Equipo primeroDelGrupoC  = this.equiposOrdenados.get(8);
-		Equipo segundoDelGrupoC  = this.equiposOrdenados.get(9);
-		
-		Equipo primeroDelGrupoD  = this.equiposOrdenados.get(12);
-		Equipo segundoDelGrupoD  = this.equiposOrdenados.get(13);
-		
-		Equipo primeroDelGrupoE  = this.equiposOrdenados.get(16);
-		Equipo segundoDelGrupoE  = this.equiposOrdenados.get(17);
-		
-		Equipo primeroDelGrupoF  = this.equiposOrdenados.get(20);
-		Equipo segundoDelGrupoF  = this.equiposOrdenados.get(21);
-		
-		Equipo primeroDelGrupoG  = this.equiposOrdenados.get(24);
-		Equipo segundoDelGrupoG  = this.equiposOrdenados.get(25);
-		
-		Equipo primeroDelGrupoH  = this.equiposOrdenados.get(28);
-		Equipo segundoDelGrupoH  = this.equiposOrdenados.get(29);
-	
-		this.equiposEnEliminatorias.add(primeroDelGrupoH);
-		this.equiposEnEliminatorias.add(primeroDelGrupoB);
-		this.equiposEnEliminatorias.add(primeroDelGrupoA);
-		this.equiposEnEliminatorias.add(primeroDelGrupoC);
-		this.equiposEnEliminatorias.add(primeroDelGrupoD);
-		this.equiposEnEliminatorias.add(primeroDelGrupoE);
-		this.equiposEnEliminatorias.add(primeroDelGrupoF);
-		this.equiposEnEliminatorias.add(primeroDelGrupoG);
-		this.equiposEnEliminatorias.add(segundoDelGrupoA);
-		this.equiposEnEliminatorias.add(segundoDelGrupoB);
-		this.equiposEnEliminatorias.add(segundoDelGrupoC);
-		this.equiposEnEliminatorias.add(segundoDelGrupoD);
-		this.equiposEnEliminatorias.add(segundoDelGrupoE);
-		this.equiposEnEliminatorias.add(segundoDelGrupoF);
-		this.equiposEnEliminatorias.add(segundoDelGrupoG);
-		this.equiposEnEliminatorias.add(segundoDelGrupoH);
+		ArrayList<Integer> indiceEquiposQuePasan = new ArrayList<>(Arrays.asList(0,1,4,5,8,9,12,13,16,17,20,21,24,25,28,29));
+		for (Integer index : indiceEquiposQuePasan) {
+			this.equiposEnEliminatorias.add(this.equiposOrdenados.get(index));
+		}
 		
 	}
 
