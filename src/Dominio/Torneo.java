@@ -28,57 +28,25 @@ public class Torneo {
 	public void iniciarTorneo() {
 		
 		Selecciones[] selecciones = Selecciones.values();
-		Grupos[] grupos = Grupos.values();
+		
 		
 		for (Selecciones seleccion : selecciones) {
 			Equipo nuevoEquipo = new Equipo(seleccion.toString());
+			
 			this.equipos.add(nuevoEquipo);
 		}
-		/*
-		for (Grupos grupo : grupos) {
-			for (int i = 0; i < 4; i++) {
-				this.equipos.get(i).setLetraGrupo(grupo.toString());
-			}
-		}*/
+		
 		
 		asignarGrupos();
 		
 	}
 	
-	//Pendiente de automatizar
+
 	private void asignarGrupos() {
-		this.equipos.get(0).setLetraGrupo("A");
-		this.equipos.get(1).setLetraGrupo("A");
-		this.equipos.get(2).setLetraGrupo("A");
-		this.equipos.get(3).setLetraGrupo("A");
-		this.equipos.get(4).setLetraGrupo("B");
-		this.equipos.get(5).setLetraGrupo("B");
-		this.equipos.get(6).setLetraGrupo("B");
-		this.equipos.get(7).setLetraGrupo("B");
-		this.equipos.get(8).setLetraGrupo("C");
-		this.equipos.get(9).setLetraGrupo("C");
-		this.equipos.get(10).setLetraGrupo("C");
-		this.equipos.get(11).setLetraGrupo("C");
-		this.equipos.get(12).setLetraGrupo("D");
-		this.equipos.get(13).setLetraGrupo("D");
-		this.equipos.get(14).setLetraGrupo("D");
-		this.equipos.get(15).setLetraGrupo("D");
-		this.equipos.get(16).setLetraGrupo("E");
-		this.equipos.get(17).setLetraGrupo("E");
-		this.equipos.get(18).setLetraGrupo("E");
-		this.equipos.get(19).setLetraGrupo("E");
-		this.equipos.get(20).setLetraGrupo("F");
-		this.equipos.get(21).setLetraGrupo("F");
-		this.equipos.get(22).setLetraGrupo("F");
-		this.equipos.get(23).setLetraGrupo("F");
-		this.equipos.get(24).setLetraGrupo("G");
-		this.equipos.get(25).setLetraGrupo("G");
-		this.equipos.get(26).setLetraGrupo("G");
-		this.equipos.get(27).setLetraGrupo("G");
-		this.equipos.get(28).setLetraGrupo("H");
-		this.equipos.get(29).setLetraGrupo("H");
-		this.equipos.get(30).setLetraGrupo("H");
-		this.equipos.get(31).setLetraGrupo("H");
+		for(int i= 0; i <this.equipos.size();i++) {
+			Grupos grupo = Grupos.values()[i/4];
+			this.equipos.get(i).setLetraGrupo(grupo.toString());
+			}
 	}
 
 	
@@ -117,9 +85,7 @@ public class Torneo {
 						&&partido.getEquipoVisitante().getNombre().equals(local.getNombre())) {
 					throw new PartidoJugadoException();
 				}
-						
 			}
-			
 		}
 		this.partidos.add(nuevoPartido);
 		
